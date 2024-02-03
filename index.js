@@ -46,4 +46,12 @@ app.put('/users/:id', async (req, res) => {
   res.send(user);
 });
 
+app.delete('/users/:id', async (req, res) => {
+  const { id } = req.params;
+
+  await User.destroy({ where: { id } });
+
+  res.send('The user was removed..');
+});
+
 app.listen(3030, () => console.log('The server running on port 3030..'));
