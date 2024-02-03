@@ -21,4 +21,17 @@ app.post('/users', (req, res) => {
     .catch((err) => console.log(err));
 });
 
+app.get('/users', async (req, res) => {
+  const users = await User.findAll();
+  res.send(users);
+});
+
+app.get('/users/:id', async (req, res) => {
+  const { id } = req.params;
+
+  const user = await User.findByPk(id);
+
+  res.send(user);
+});
+
 app.listen(3030, () => console.log('The server running on port 3030..'));
