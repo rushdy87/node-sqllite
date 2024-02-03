@@ -1,5 +1,6 @@
 const express = require('express');
 const sequelize = require('./database');
+const User = require('./User');
 
 sequelize
   .sync()
@@ -7,5 +8,17 @@ sequelize
   .catch((err) => console.log(err));
 
 const app = express();
+
+app.use(express.json());
+
+app.post('/users', (req, res) => {
+  const user = req.body;
+  console.log(user);
+  User.create(user)
+    .then(() => {
+      res.send('<h1>The user is inserted..</h1>');
+    })
+    .catch((err) => console.log(err));
+});
 
 app.listen(3030, () => console.log('The server running on port 3030..'));
