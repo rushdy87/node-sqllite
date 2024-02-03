@@ -1,4 +1,10 @@
 const express = require('express');
+const sequelize = require('./database');
+
+sequelize
+  .sync()
+  .then(() => console.log('The database is ready..'))
+  .catch((err) => console.log(err));
 
 const app = express();
 
