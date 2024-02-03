@@ -34,4 +34,16 @@ app.get('/users/:id', async (req, res) => {
   res.send(user);
 });
 
+app.put('/users/:id', async (req, res) => {
+  const { id } = req.params;
+  const updatedUser = req.body;
+  const user = await User.findByPk(id);
+
+  await user.update({ ...updatedUser });
+
+  await user.save();
+
+  res.send(user);
+});
+
 app.listen(3030, () => console.log('The server running on port 3030..'));
